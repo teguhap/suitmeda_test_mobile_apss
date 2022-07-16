@@ -116,15 +116,24 @@ class _FirstPageState extends State<FirstPage> {
                                 height: 15,
                               ),
                               MyButton(
-                                  text: 'NEXT',
-                                  onTap: () {
+                                text: 'NEXT',
+                                onTap: () {
+                                  if (nameController.text.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Please input the name!'),
+                                      ),
+                                    );
+                                  } else {
                                     Navigator.of(context).pushNamed(
                                       SecondPage.routePath,
                                       arguments: nameController.text.toString(),
                                     );
                                     palindromeController.clear();
                                     nameController.clear();
-                                  }),
+                                  }
+                                },
+                              ),
                             ],
                           ),
                         )

@@ -61,16 +61,16 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             MyButton(
-                text: 'Choose a User',
-                onTap: () async {
-                  var userData = await Navigator.of(context).pushNamed(
-                    ThirdPage.routePath,
-                  );
-                  setState(() {
-                    userSelected =
-                        (userData != null) ? userData.toString() : "";
-                  });
-                })
+              text: 'Choose a User',
+              onTap: () async {
+                var userData = await Navigator.of(context).pushNamed(
+                  ThirdPage.routePath,
+                );
+                setState(() {
+                  userSelected = (userData != null) ? userData.toString() : "";
+                });
+              },
+            ),
           ],
         ),
       ),
