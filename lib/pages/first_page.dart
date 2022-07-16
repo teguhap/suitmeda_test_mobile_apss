@@ -21,7 +21,7 @@ class _FirstPageState extends State<FirstPage> {
 
     for (var i = 0; i < text.length; i++) {
       if (text[i] != " ") {
-        theText = text[i] + theText;
+        theText = theText + text[i];
       }
     }
 
