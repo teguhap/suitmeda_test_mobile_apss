@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:suitmedia_test_app/pages/first_page.dart';
 import 'package:suitmedia_test_app/pages/second_page.dart';
+import 'package:suitmedia_test_app/pages/third_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -18,6 +19,10 @@ class RouteGenerator {
           );
         }
         return errorRoute();
+      case ThirdPage.routePath:
+        return MaterialPageRoute(
+          builder: (_) => ThirdPage(),
+        );
       default:
         return errorRoute();
     }
@@ -29,11 +34,12 @@ class RouteGenerator {
         body: SafeArea(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Terjadi Kesalahan'),
+                Center(child: Text('Terjadi Kesalahan')),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(_);
+                      Navigator.pushNamed(_, FirstPage.routePath);
                     },
                     child: Text('Back'))
               ],

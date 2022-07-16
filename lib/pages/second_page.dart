@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:suitmedia_test_app/common/my_color.dart';
 import 'package:suitmedia_test_app/common/my_typography.dart';
+import 'package:suitmedia_test_app/pages/third_page.dart';
 import 'package:suitmedia_test_app/widgets/my_button.dart';
 
 class SecondPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -58,17 +60,20 @@ class _SecondPageState extends State<SecondPage> {
                     )),
               ),
             ),
-            MyButton(text: 'Choose a User', onTap: () {})
+            MyButton(
+                text: 'Choose a User',
+                onTap: () async {
+                  var userData = await Navigator.of(context).pushNamed(
+                    ThirdPage.routePath,
+                  );
+                  setState(() {
+                    userSelected =
+                        (userData != null) ? userData.toString() : "";
+                  });
+                })
           ],
         ),
       ),
     );
   }
 }
-// () async {
-//                 var userData =
-//                     await Navigator.pushNamed(context, ThirdPage.routeName);
-//                 setState(() {
-//                   user = (userData != null) ? userData as String : "";
-//                 });
-//               },
