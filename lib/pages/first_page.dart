@@ -88,7 +88,7 @@ class _FirstPageState extends State<FirstPage> {
                           height: 30,
                         ),
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: Column(
                             children: [
                               MyButton(

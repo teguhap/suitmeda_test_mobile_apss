@@ -57,9 +57,9 @@ class _ThirdPageState extends State<ThirdPage> {
     }
   }
 
-  Future<void> getUsers(String pageParams) async {
+  Future<void> getUsers(String pageNums) async {
     try {
-      final url = "https://reqres.in/api/users?page=" + pageParams;
+      final url = "https://reqres.in/api/users?page=$pageNums";
       Uri uriUrl = Uri.parse(url);
 
       var res = await HTTP.get(uriUrl);
@@ -113,42 +113,32 @@ class _ThirdPageState extends State<ThirdPage> {
                 controller: refreshController,
                 onRefresh: refresh,
                 onLoading: moreUser,
-                child: (userList.isEmpty)
-                    ? Center(
-                        child: Text(
-                          'Users is Empty',
-                          style: MyTypography.titleH2.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                child: ListView.builder(
+                    itemCount: userList.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pop(
+                              context,
+                              userList[index]["first_name"] +
+                                  " " +
+                                  userList[index]["last_name"]);
+                        },
+                        child: ListTile(
+                          title: Text(
+                            userList[index]["first_name"] +
+                                " " +
+                                userList[index]["last_name"],
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(userList[index]["email"]),
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(userList[index]["avatar"]),
                           ),
                         ),
-                      )
-                    : ListView.builder(
-                        itemCount: userList.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.pop(
-                                  context,
-                                  userList[index]["first_name"] +
-                                      " " +
-                                      userList[index]["last_name"]);
-                            },
-                            child: ListTile(
-                              title: Text(
-                                userList[index]["first_name"] +
-                                    " " +
-                                    userList[index]["last_name"],
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(userList[index]["email"]),
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(userList[index]["avatar"]),
-                              ),
-                            ),
-                          );
-                        }),
+                      );
+                    }),
               ));
   }
 }
